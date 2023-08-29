@@ -12,7 +12,7 @@ class Que extends DB
     {
         $this->view("./view/backend/que.php");
     }
-    
+
     function subject($id)
     {
         $subject = $this->find($id);
