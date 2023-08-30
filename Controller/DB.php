@@ -113,13 +113,15 @@ class DB
         extract($arg);
         include($path);
     }
-    function paginate($num, $arg = null, $arg2 = null)
+
+    function paginate($num, $arg = null)
     {
-        $total = $this->count($arg, $arg2);
+        $total = $this->count($arg);
         $pages = ceil($total / $num);
         $now = $_GET['p'] ?? 1;
         $start = ($now - 1) * $num;
-        $rows = $this->all($arg, $arg2 . " limit $start,$num");
+        // $當前頁數的第一筆資料的索引值
+        $rows = $this->all($arg, " limit $start,$num");
         $this->links = [
             'total' => $total,
             'pages' => $pages,
@@ -130,6 +132,7 @@ class DB
         ];
         return $rows;
     }
+
     function links($target = null)
     {
         if (is_null($target)) {
@@ -152,4 +155,10 @@ class DB
         }
         return $html;
     }
+}
+
+function dd($array){
+    echo "<pre>";
+    print_r($array);
+    echo "</pre>";
 }

@@ -13,6 +13,7 @@
             <tr>
                 <td width="30%" class="title"><?= $row['title'] ?></td>
                 <td width="40%" class="content">
+                    <!-- mb_substr(str,開始,長度) -->
                     <div class="short"><?= mb_substr($row['text'], 0, 25) ?>...</div>
                     <div class="all" style="display: none;"><?= $row['text'] ?></div>
                 </td>
@@ -37,6 +38,7 @@
     $(".title,.content").on("click", function() {
         $(this).parent().find(".short,.all").toggle()
     })
+    // 切換
 
     $(".goods").on("click", function() {
         let news, type

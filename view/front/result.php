@@ -2,26 +2,25 @@
 $subject = $Que->subject($_GET['id']);
 ?>
 <fieldset>
-    <legend>目前位置：首頁 > 問卷調查 > <?=$subject['text']?></legend>
-    <h3><?=$subject['text']?></h3>
+    <legend>目前位置：首頁 > 問卷調查 > <?= $subject['text'] ?></legend>
+    <h3><?= $subject['text'] ?></h3>
     <?php
-foreach ($options as $opt) {
-    $sum = ($subject['count'] == 0) ? 1 : $subject['count'];
-    $width = round($opt['count'] / $sum, 2) * 100;
-    $background = ($width == 0) ? '#fff' : '#ccc';
-    echo "<div style='display:flex;align-itmes:center'>";
-    echo "<div style='width:50%'>";
-    echo $opt['text'];
-    echo "</div>";
-    echo "<div style='width:50%;display:flex'>";
-    echo "<div style='min-width:max-content;width:{$width}%;background:{$background};height:25px;text-align:center'>";
-    echo $opt['count'] . "票({$width}%)";
-    echo "</div>";
-    echo "</div>";
-    echo "</div>";
-}
-?>
-<p class="ct">
-    <button onclick="location.href='?do=que'">返回</button>
-</p>
+    foreach ($subject['options'] as $idx => $opt) {
+        $total = ($subject['vote'] == 0) ? 1 : $subject['vote'];
+        $rate = ($opt['vote'] / $total);
+        // echo $rate;
+    ?>
+    <p>
+        <div style="display: flex;align-items:center;">
+            <div style="width: 40%;"><?= ($idx + 1) . ". " . $opt['text'] ?></div>
+            <div style="width:<?= (40 * $rate) ?>%;background:#aaa;height:32px"></div>
+            <div style="width: 20%;">
+                <?= $opt['vote'] ?>票(<?= round($rate * 100) ?>%)
+            </div>
+        </div>
+    </p>
+    <?php
+    }
+    ?>
+    <div class="ct"><button onclick="location.href='?do=que'">返回</button></div>
 </fieldset>

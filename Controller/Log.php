@@ -7,6 +7,7 @@ class Log extends DB
     {
         parent::__construct('log');
     }
+    
     function showGoods($news)
     {
         $chk = $this->count(['user' => $_SESSION['user'], 'news' => $news]);

@@ -16,7 +16,9 @@
             <td><?=$idx+1?></td>
             <td><?=$sub['text']?></td>
             <td><?=$sub['vote']?></td>
-            <td><a href="?do=result.php&id=<?=$sub['id']?>">結果</a></td>
+            <td>
+                <a href="?do=result&id=<?=$sub['id']?>">結果</a>
+            </td>
             <td>
                 <?php
                 if(isset($_SESSION['user'])){
